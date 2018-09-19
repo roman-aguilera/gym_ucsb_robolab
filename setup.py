@@ -2,5 +2,5 @@ from setuptools import setup
 
 setup(name='gym_ucsb_robolab',
       version='0.0.1',
-      install_requires['gym','mujoco_py']
-)
+      install_requires=['gym', 'mujoco_py', 'numpy']
+      )
