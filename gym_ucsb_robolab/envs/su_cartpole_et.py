@@ -39,10 +39,11 @@ class SUCartPoleEtEnv(mujoco_env.MujocoEnv):
         if self.upright_count > 10:
             done = True
             reward = 10
-        elif self.step_count > self.num_steps:
+        elif self.cur_step > self.num_steps:
             done = True
             reward = -10
 
+        self.cur_step += 1
         return ob, reward, done, {}
 
     def reset_model(self):
