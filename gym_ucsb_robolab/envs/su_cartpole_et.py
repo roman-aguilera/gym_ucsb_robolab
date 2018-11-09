@@ -10,6 +10,7 @@ class SUCartPoleEtEnv(mujoco_env.MujocoEnv):
 
         self.num_steps = num_steps
         self.cur_step = 0
+        self.upright_count = 0
 
         mujoco_env.MujocoEnv.__init__(self, os.path.dirname(__file__) + '/su_cartpole.xml', 1)
         #super(SUCartPoleEnv, self).__init__(os.path.dirname(__file__) + '/su_cartpole.xml', 1)
@@ -17,7 +18,7 @@ class SUCartPoleEtEnv(mujoco_env.MujocoEnv):
         self.init_qpos = np.array([0, pi])
         self.init_qvel = np.array([0, 0])
         self.set_state(self.init_qpos, self.init_qvel)
-        self.upright_count = 0
+
 
     def step(self, action):
         # get newest state variables
@@ -37,9 +38,10 @@ class SUCartPoleEtEnv(mujoco_env.MujocoEnv):
 
         if self.upright_count > 10:
             done = True
-
-        if self.step_count > self.num_steps:
+            reward = 10
+        elif self.step_count > self.num_steps:
             done = True
+            reward = -10
 
         return ob, reward, done, {}
 
