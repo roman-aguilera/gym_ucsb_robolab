@@ -1,1 +1,3 @@
 from gym_ucsb_robolab.envs.su_cartpole import SUCartPoleEnv 
+from gym_ucsb_robolab.envs.su_cartpole_sparse import SUCartPoleSparseEnv
+from gym_ucsb_robolab.envs.su_cartpole_et import SUCartPoleEtEnv

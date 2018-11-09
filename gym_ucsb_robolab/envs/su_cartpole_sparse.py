@@ -4,9 +4,9 @@ from numpy import pi
 from gym.envs.mujoco import mujoco_env
 
 
-class SUCartPoleEnv(mujoco_env.MujocoEnv):
+class SUCartPoleSparseEnv(mujoco_env.MujocoEnv):
 
-    def __init__(self, num_steps  = 1500):
+    def __init__(self, num_steps=1500):
 
         self.num_steps = num_steps
         self.cur_step = 0
