@@ -14,3 +14,9 @@ register(
     id='su_cartpole_et-v0',
     entry_point='gym_ucsb_robolab.envs:SUCartPoleEtEnv',
 )
+
+register(
+    id='su_pendulum-v0',
+    entry_point='gym_ucsb_robolab.envs:SUPendulumEnv',
+)
+
