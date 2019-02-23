@@ -27,7 +27,7 @@ class SUCartPoleEnv(mujoco_env.MujocoEnv):
         self.do_simulation(action, self.frame_skip)
 
         ob = np.concatenate([self.sim.data.qpos, self.sim.data.qvel]).ravel()
-        reward = np.sin(self.sim.data.qpos[1])
+        reward = np.cos(self.sim.data.qpos[1]) - np.abs(self.sim.data.qpos[0])
         #if -.2 < self.sim.data.qpos[1] < .2 :
         #    reward = 1
         #else:

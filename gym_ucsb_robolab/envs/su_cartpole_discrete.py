@@ -4,9 +4,9 @@ from numpy import pi
 from gym.envs.mujoco import mujoco_env
 
 
-class SUCartPoleSparseEnv(mujoco_env.MujocoEnv):
+class SUCartPoleEnv(mujoco_env.MujocoEnv):
 
-    def __init__(self, num_steps=1500):
+    def __init__(self, num_steps  = 1500):
 
         self.num_steps = num_steps
         self.cur_step = 0
@@ -27,10 +27,11 @@ class SUCartPoleSparseEnv(mujoco_env.MujocoEnv):
         self.do_simulation(action, self.frame_skip)
 
         ob = np.concatenate([self.sim.data.qpos, self.sim.data.qvel]).ravel()
-        if -.2 < self.sim.data.qpos[1] < .2 :
-            reward = 1.0
-        else:
-            reward = 0.0
+        reward = np.sin(self.sim.data.qpos[1])
+        #if -.2 < self.sim.data.qpos[1] < .2 :
+        #    reward = 1
+        #else:
+        #    reward = 0
 
         # TODO figure out how to keep state history around (maybe do this in the agent??)
         self.cur_step += 1

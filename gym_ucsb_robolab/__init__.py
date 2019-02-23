@@ -16,6 +16,12 @@ register(
 )
 
 register(
+    id='su_cartpole_discrete-v0',
+    entry_point='gym_ucsb_robolab.envs:SUCartPoleDiscreteEnv',
+)
+
+
+register(
     id='su_pendulum-v0',
     entry_point='gym_ucsb_robolab.envs:SUPendulumEnv',
 )
