@@ -4,7 +4,7 @@ from numpy import pi
 from gym.envs.mujoco import mujoco_env
 
 
-class SUCartPoleEnv(mujoco_env.MujocoEnv):
+class SUCartPoleDiscreteEnv(mujoco_env.MujocoEnv):
 
     def __init__(self, num_steps  = 1500):
 
