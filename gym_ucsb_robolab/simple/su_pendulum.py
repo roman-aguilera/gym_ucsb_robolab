@@ -8,6 +8,9 @@ from scipy.integrate import solve_ivp
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
 
+
+# TODO
+# warning this is incomplete, check out su_cartpole for a working example
 class SUPendulumEnv(gym.Env):
     def __init__(self, num_steps  = 1500):
 
