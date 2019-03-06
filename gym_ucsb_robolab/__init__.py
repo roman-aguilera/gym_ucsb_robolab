@@ -22,7 +22,7 @@ register(
 
 register(
     id='su_cartpole-v0',
-    entry_point='gym_ucsb_robolab.simple:SUCartPoleEnv',
+    entry_point='gym_ucsb_robolab.classic_control:SUCartPoleEnv',
 )
 
 register(

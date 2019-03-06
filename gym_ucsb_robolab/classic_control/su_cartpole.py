@@ -9,7 +9,7 @@ import matplotlib.animation as animation
 
 class SUCartPoleEnv(gym.Env):
     """
-    Environment for for a simple cartpole pendulum.
+    Environment for for a classic_control cartpole pendulum.
 
     mostly just a rewrite of sgillen_research/cartpole/cartpole_class.py
 
@@ -27,7 +27,6 @@ class SUCartPoleEnv(gym.Env):
         'render.modes': ['human'],
         'video.frames_per_second': 15
     }
-
 
     def __init__(self, num_steps  = 1500, dt = .01):
         self.L = 1.0   # length of the pole (m)
@@ -54,9 +53,9 @@ class SUCartPoleEnv(gym.Env):
         low = -high
         self.observation_space = gym.spaces.Box(low=low, high=high)
 
-        self.TORQUE_MAX = 10.0
+        self.TORQUE_MAX = 100.0
         self.torque_noise_max = 0.0;
-        self.action_space = gym.spaces.Box(low=-np.array(self.TORQUE_MAX), high=np.array(self.TORQUE_MAX))
+        self.action_space = gym.spaces.Box(-self.TORQUE_MAX, self.TORQUE_MAX, shape=(1,))
 
         self.viewer = None
 

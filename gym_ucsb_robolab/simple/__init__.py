@@ -1,2 +1,0 @@
-from gym_ucsb_robolab.simple.su_cartpole import SUCartPoleEnv
-from gym_ucsb_robolab.simple.su_pendulum import SUPendulumEnv
