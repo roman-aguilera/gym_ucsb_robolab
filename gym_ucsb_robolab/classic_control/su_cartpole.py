@@ -2,6 +2,8 @@ import numpy as np
 import gym
 from numpy import cos, sin, pi
 
+from gym.utils import seeding
+
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
@@ -63,7 +65,7 @@ class SUCartPoleEnv(gym.Env):
         self.reset()
 
     def seed(self, seed=None):
-        self.np_random, seed = gym.utils.seeding.np_random(seed)
+        self.np_random, seed = seeding.np_random(seed)
         return [seed]
 
     def reset(self):
