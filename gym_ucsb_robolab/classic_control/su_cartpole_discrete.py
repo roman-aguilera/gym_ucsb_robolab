@@ -1,7 +1,6 @@
 import numpy as np
 import gym
 from numpy import cos, sin, pi
-from gym.envs.classic_control import rendering
 
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -122,6 +121,7 @@ class SUCartPoleDiscEnv(gym.Env):
 
     # basically taken from gym's classic control cartpole
     def render(self, mode='human'):
+        from gym.envs.classic_control import rendering
 
         if self.state is None: return None
 
