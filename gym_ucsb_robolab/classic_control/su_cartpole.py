@@ -41,7 +41,7 @@ class SUCartPoleEnv(gym.Env):
         self.state = None
 
         # THETA_MAX is implict (-pi, pi)
-        self.X_MAX = 10.0
+        self.X_MAX = 100.0
 
         # might impose an upper limit on these but it would only end the episode
         self.DTHETA_MAX = 100.0*pi
@@ -53,8 +53,8 @@ class SUCartPoleEnv(gym.Env):
         low = -high
         self.observation_space = gym.spaces.Box(low=low, high=high)
 
-        self.TORQUE_MAX = 100.0
-        self.torque_noise_max = 0.0;
+        self.TORQUE_MAX = 1000.0
+        self.torque_noise_max = 0.0
         self.action_space = gym.spaces.Box(-self.TORQUE_MAX, self.TORQUE_MAX, shape=(1,))
 
         self.viewer = None
@@ -69,6 +69,8 @@ class SUCartPoleEnv(gym.Env):
 
     def reset(self):
         self.state = np.array([0,0,0,0]) + self.np_random.uniform(-self.state_noise_max, self.state_noise_max, size=(4,))
+        self.cur_step = 0
+
         return self.state
 
     def _get_ob(self):
@@ -80,7 +82,7 @@ class SUCartPoleEnv(gym.Env):
         # RL algorithms aware of the action space won't need this but things like the
         # imitation learning or energy shaping controllers might try feeding in something
         # above the torque limit
-        torque = np.clip(action, -self.TORQUE_MAX, self.TORQUE_MAX)
+        torque = np.clip(action, -self.TORQUE_MAX, self.TORQUE_MAX)*100
 
         # Add noise to the force action
         if self.torque_noise_max > 0:
@@ -89,8 +91,8 @@ class SUCartPoleEnv(gym.Env):
         #ns = rk4(self._derivs, torque, 0, self.dt, self.state)
         ns = euler(self._derivs, torque, 0, self.dt, self.state)
 
-        #self.state[0] = wrap(ns[0], 0,  2*pi)
-        self.state[0] = ns[0]
+        self.state[0] = wrap(ns[0], 0,  2*pi)
+        #self.state[0] = ns[0]
         self.state[1] = ns[1]
         #self.state[1] = np.clip(ns[1], -self.X_MAX, self.X_MAX)
         self.state[2] = ns[2]
@@ -100,7 +102,7 @@ class SUCartPoleEnv(gym.Env):
         #self.state[3] = np.clip(ns[3], -self.DX_MAX, self.DX_MAX)
 
         # Should reward be something we pass in ? I do like to mess with them a lot...
-        reward = np.cos(self.state[0])
+        reward = -np.cos(self.state[0])
 
         self.cur_step += 1
         if self.cur_step > self.num_steps:
@@ -110,15 +112,15 @@ class SUCartPoleEnv(gym.Env):
 
         return self.state, reward, done, {}
 
-    def reset_model(self):
-        self.state = self.np_random.uniform(low=-0.1, high=0.1, size=(4,))
-        self.cur_step = 0
-        return self._get_obs()
+    #def reset_model(self):
+     #   self.state = self.np_random.uniform(low=-0.1, high=0.1, size=(4,))
+     #   self.cur_step = 0
+     #   return self._get_obs()
 
     # def render(self, mode='human', close=False):
 
     # basically taken from gym's classic control cartpole
-    def render(self):
+    def render(self, mode='human'):
 
         if self.state is None: return None
 
