@@ -26,7 +26,11 @@ register(
 )
 
 register(
-    id='su_pendulum-v0',
-    entry_point='gym_ucsb_robolab.mujoco:SUPendulumEnv',
+    id='su_cartpole_discrete-v0',
+    entry_point='gym_ucsb_robolab.classic_control:SUCartPoleDiscEnv'
 )
 
+register(
+    id='su_pendulum-v0',
+    entry_point='gym_ucsb_robolab.classic_control:SUPendulumEnv',
+)
