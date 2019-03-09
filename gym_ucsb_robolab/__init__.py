@@ -34,3 +34,9 @@ register(
     id='su_pendulum-v0',
     entry_point='gym_ucsb_robolab.classic_control:SUPendulumEnv',
 )
+
+register(
+    id='lorenz-v0',
+    entry_point='gym_ucsb_robolab.simple_nonlinear:LorenzEnv',
+)
+
