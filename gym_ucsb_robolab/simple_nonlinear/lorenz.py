@@ -19,7 +19,7 @@ class LorenzEnv(gym.Env):
 
     """
 
-    def __init__(self, num_steps  = 1500, dt = .01):
+    def __init__(self, num_steps  = 100, dt = .01):
 
         # Lorenz system constants
         self.s = 10
@@ -76,16 +76,17 @@ class LorenzEnv(gym.Env):
         if self.u_noise_max > 0:
             action += self.np_random.uniform(-self.torque_noise_max, self.torque_noise_max)
 
+        ds = self._derivs(0, self.state, action)
         self.state = self.integrator(self._derivs, action, 0, self.dt, self.state)
 
         # Should reward be something we pass in ? I do like to mess with them a lot...
-
+        w = 10 # TODO sort this out it's clunky
         t = self.cur_step*self.dt
-        reward = np.sum(
-            - abs(self.state[0] - np.cos(self.w*t)),
-            - abs(self.state[1] - np.sin(self.w*t)),
-            -abs(self.state[2])
-        )
+        reward = np.sum([
+            - abs(self.state[0] - np.cos(w*t)),
+            - abs(self.state[1] - np.sin(w*t)),
+            - abs(self.state[2])
+        ])
 
         self.cur_step += 1
         if self.cur_step > self.num_steps:
@@ -93,7 +94,7 @@ class LorenzEnv(gym.Env):
         elif (np.abs(self.state) > self.state_max).any():
             done = True
 
-        return self.state, reward, done, {}
+        return self.state, reward, done, ds
 
     def render(self, mode='human'):
        raise NotImplementedError
