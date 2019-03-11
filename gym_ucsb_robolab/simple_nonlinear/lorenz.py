@@ -80,13 +80,10 @@ class LorenzEnv(gym.Env):
         self.state = self.integrator(self._derivs, action, 0, self.dt, self.state)
 
         # Should reward be something we pass in ? I do like to mess with them a lot...
-        w = 10 # TODO sort this out it's clunky
-        t = self.cur_step*self.dt
-        reward = np.sum([
-            - abs(self.state[0] - np.cos(w*t)),
-            - abs(self.state[1] - np.sin(w*t)),
-            - abs(self.state[2])
-        ])
+        if (0 < self.state[0] < 20  and 0 < self.state[1] < 30 and 0 < self.state[2] < 50):
+            reward = 1
+        else:
+            reward = -1
 
         self.cur_step += 1
         if self.cur_step > self.num_steps:
