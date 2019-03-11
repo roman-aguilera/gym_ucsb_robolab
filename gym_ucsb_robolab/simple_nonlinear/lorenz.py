@@ -81,9 +81,9 @@ class LorenzEnv(gym.Env):
 
         # Should reward be something we pass in ? I do like to mess with them a lot...
         if (0 < self.state[0] < 20  and 0 < self.state[1] < 30 and 0 < self.state[2] < 50):
-            reward = 1
+            reward = 1.0
         else:
-            reward = -1
+            reward = -1.0
 
         self.cur_step += 1
         if self.cur_step > self.num_steps:
@@ -91,7 +91,7 @@ class LorenzEnv(gym.Env):
         elif (np.abs(self.state) > self.state_max).any():
             done = True
 
-        return self.state, reward, done, ds
+        return self.state, reward, done, {}
 
     def render(self, mode='human'):
        raise NotImplementedError
