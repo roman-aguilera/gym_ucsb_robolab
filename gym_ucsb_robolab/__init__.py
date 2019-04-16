@@ -40,3 +40,8 @@ register(
     entry_point='gym_ucsb_robolab.simple_nonlinear:LorenzEnv',
 )
 
+register(
+    id='5linkWalker-v3',
+    max_episode_steps=1000,
+    entry_point='gym.envs.mujoco:FiveLinkwalkerv3Env',
+)
