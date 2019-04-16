@@ -41,7 +41,7 @@ register(
 )
 
 register(
-    id='5linkWalker-v3',
+    id='five_link-v3',
     max_episode_steps=1000,
-    entry_point='gym.envs.mujoco:FiveLinkwalkerv3Env',
+    entry_point='gym_ucsb_robolab.mujoco:FiveLinkWalkerEnv',
 )

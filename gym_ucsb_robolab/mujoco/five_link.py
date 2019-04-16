@@ -1,8 +1,14 @@
+# Nihar Talele
+
+
 import numpy as np
+import os
 from gym import utils
 from gym.envs.mujoco import mujoco_env
 
-class FiveLinkwalkerv3Env(mujoco_env.MujocoEnv, utils.EzPickle):
+
+
+class FiveLinkWalkerEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
     def __init__(self):
         self.qpos_cur = np.zeros([1, 7])
@@ -17,7 +23,7 @@ class FiveLinkwalkerv3Env(mujoco_env.MujocoEnv, utils.EzPickle):
         self.lfoot = 0
         self.rfoot = 0
         # print("Reached", id(self))
-        mujoco_env.MujocoEnv.__init__(self, "5linkwalkerv3_train.xml", 4)
+        mujoco_env.MujocoEnv.__init__(self,  os.path.dirname(__file__) + '/five_link.xml', 4)
         utils.EzPickle.__init__(self)
         # print("Can't reach", id(self))
 
