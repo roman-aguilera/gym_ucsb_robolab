@@ -45,3 +45,8 @@ register(
     max_episode_steps=1000,
     entry_point='gym_ucsb_robolab.mujoco:FiveLinkWalkerEnv',
 )
+
+register(
+    id='dyn_car-v0',
+    entry_point='gym_ucsb_robolab.car:DynCarEnv',
+)
